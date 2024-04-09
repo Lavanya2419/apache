@@ -1,10 +1,11 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Form
 
-# Create an instance of the FastAPI class
 app = FastAPI()
 
-# Define a route that responds to GET requests at the root URL ("/")
-@app.get("/")
-def read_root():
-    return {"message": "Hello, World!"}
-
+@app.post("/login")
+async def login(username: str = Form(...), password: str = Form(...)):
+    # Your login logic here
+    if username == "admin" and password == "password":
+        return {"message": "Login successful"}
+    else:
+        return {"message": "Invalid username or password"}
